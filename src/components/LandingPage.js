@@ -23,6 +23,10 @@ const LandingPage = () => {
     navigate(`/game/${tempData}?name=${name}&mode=${mode}`);
   }
 
+  function handleMoveToJoin() {
+    navigate(`/game/join`);
+  }
+
   useEffect(() => {
     if (gameId !== 0) {
       fetchGameData();
@@ -157,16 +161,34 @@ const LandingPage = () => {
                 : " bg-[#878B94]")
             }
             onClick={() => {
-              let temp = Date.now();
-              setGameId(temp);
-              setLoading(true);
-              setTimeout(() => {
-                setLoading(false);
-                handleStart(temp);
-              }, 3000);
+              if (name.length > 0 && mode.length > 0) {
+                let temp = Date.now();
+                setGameId(temp);
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                  handleStart(temp);
+                }, 3000);
+              }
             }}
           >
             Start
+          </div>
+          <div className="w-[100px] flex justify-center items-center my-[20px] h-0 overflow-visible border border-[#15203a3b]">
+            <div className="h-[20px] flex text-[14px] justify-center items-center bg-white px-[8px]">
+              OR
+            </div>
+          </div>
+
+          <div
+            className={
+              " flex justify-center items-center w-[300px] h-[43px] rounded-lg px-[15px] outline-none font-[interSemibold] cursor-pointer text-white bg-[#0F172A]"
+            }
+            onClick={() => {
+              handleMoveToJoin();
+            }}
+          >
+            Join
           </div>
         </div>
       )}

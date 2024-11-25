@@ -241,8 +241,9 @@ const GamePage = () => {
   };
 
   const handleCopyID = () => {
+    let data = gameId + "_" + mode?.charAt(0)?.toUpperCase();
     navigator.clipboard
-      .writeText(gameId)
+      .writeText(data)
       .then(() => {
         // alert("Text copied to clipboard!");
         setIDCopied(true);
@@ -456,15 +457,23 @@ const GamePage = () => {
                       </div>
 
                       <span className="text-[16px] mt-[25px] mb-[2px] font-[interSemibold] flex justify-start items-center">
-                        Game ID : {gameId}{" "}
+                        Game ID
+                      </span>
+                      <span
+                        className="text-[14px] flex justify-start items-center leading-4"
+                        onClick={() => {
+                          handleCopyID();
+                        }}
+                      >
+                        {gameId}_{mode?.charAt(0)?.toUpperCase()}{" "}
                         <Files
                           width={16}
                           height={16}
                           strokeWidth={2.4}
                           className="ml-[10px]"
-                          onClick={() => {
-                            handleCopyID();
-                          }}
+                          // onClick={() => {
+                          //   handleCopyID();
+                          // }}
                         />
                       </span>
                     </div>

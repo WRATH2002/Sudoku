@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import GamePage from "./components/GamePage";
 import JoiningPage from "./components/JoiningPage";
+import IndividualJoiningPage from "./components/IndividualJoiningPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/game/join" element={<IndividualJoiningPage />} />
           <Route path="/game/:gameId" element={<GamePage />} />
           <Route path="/joinGame/:gameId" element={<JoiningPage />} />
         </Routes>
