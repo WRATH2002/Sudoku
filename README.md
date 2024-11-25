@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Sudoku Multiplayer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Overview
 
-## Available Scripts
+This is a **Sudoku Multiplayer** website built with **React**, **Firebase**, **JavaScript**, **HTML**, **CSS**, and **Tailwind CSS**. It provides a fun and interactive way to play Sudoku with friends in real-time, offering additional features like chat, room creation, and easy sharing options.
 
-In the project directory, you can run:
+**Live Demo** --> https://sudokuio.vercel.app/
 
-### `npm start`
+# Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**React:** For building the user interface.<br />
+**Firebase:** For real-time database, authentication, and hosting.<br />
+**JavaScript:** For dynamic functionalities.<br />
+**HTML:** For the structure of the web pages.<br />
+**CSS & Tailwind CSS:** For styling the application.<br />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# The primary features include:
 
-### `npm test`
+- **Multiplayer Sudoku:** Play Sudoku with friends in a shared room.
+- **Real-Time Chat:** Chat with friends while solving puzzles together.
+- **Room Creation & Joining:** Create or join rooms for seamless gameplay.
+- **QR Code Sharing:** Generate a QR code or copy a link to share your game room.
+- **Classic Sudoku Features:** Enjoy all the traditional features of Sudoku.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Features
 
-### `npm run build`
+### **Multiplayer Sudoku**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Solve Sudoku puzzles with friends in real-time.
+- Compete or collaborate to complete the puzzle.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **Real-Time Chat**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Chat with friends directly within the game room.
+- Enhance the gaming experience with seamless communication.
 
-### `npm run eject`
+### **Room Creation & Joining**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Create private rooms to play with friends.
+- Share the room link or QR code for easy access.
+- Join game rooms instantly using a shared link or QR code.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **QR Code Sharing**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Generate a QR code for the room link.
+- Easily share it with friends for quick and hassle-free access.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### **Classic Sudoku Features**
 
-## Learn More
+- Play Sudoku puzzles with a user-friendly interface.
+- Built-in validation to ensure correct gameplay.
+- Adjustable difficulty levels to match your skill level.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Additional Features:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Firebase Real-Time Database:** Ensures smooth synchronization of game states and chat messages.
+- **Copy Link Sharing:** Quick option to copy and share room links with friends.
+- **Responsive Design:** Optimized for all devices, including desktops and mobile.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---

@@ -7,7 +7,7 @@ import JoiningPage from "./components/JoiningPage";
 
 function App() {
   return (
-    <div className="w-full h-[100svh] flex justify-center items-center flex-col">
+    <div className="w-full h-[100svh] flex justify-center items-center flex-col select-none">
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />

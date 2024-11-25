@@ -226,7 +226,7 @@ const GamePage = () => {
   const handleCopyLink = () => {
     navigator.clipboard
       .writeText(
-        `http://localhost:3000/joinGame/join?roomId=${gameId}&mode=${mode}`
+        `https://sudokuio.vercel.app/joinGame/join?roomId=${gameId}&mode=${mode}`
       )
       .then(() => {
         // alert("Text copied to clipboard!");
@@ -432,7 +432,7 @@ const GamePage = () => {
                                 maxWidth: "100%",
                                 width: "100%",
                               }}
-                              value={`http://192.168.0.3:3000/joinGame/join?roomId=${gameId}&mode=${mode}`}
+                              value={`https://sudokuio.vercel.app/joinGame/join?roomId=${gameId}&mode=${mode}`}
                               viewBox={`0 0 256 256`}
                             />
                           </div>
@@ -482,9 +482,6 @@ const GamePage = () => {
                   <div
                     className="w-full h-[40px] mt-[10px] rounded-lg  border-[1.5px] border-[#ecf0f5] flex justify-center items-center text-[14px] text-black font-[IinterSemibold] hover:bg-[#F1F5F9] cursor-pointer"
                     onClick={() => {
-                      console.log(
-                        `http://localhost:3000/joinGame/join?roomId=${gameId}&mode=${mode}`
-                      );
                       handleCopyLink();
                       // console.log(searchParams.get("mode"));
                       // console.log(new URL(url));
@@ -509,7 +506,7 @@ const GamePage = () => {
                         maxWidth: "100%",
                         width: "100%",
                       }}
-                      value={`http://192.168.0.3:3000/joinGame/join?roomId=${gameId}&mode=${mode}`}
+                      value={`https://sudokuio.vercel.app/joinGame/join?roomId=${gameId}&mode=${mode}`}
                       viewBox={`0 0 256 256`}
                     />
                   </div>
