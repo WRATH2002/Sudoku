@@ -1,38 +1,182 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: google;
+  src: url(./assets/font/Product\ Sans\ Regular.ttf);
+}
+@font-face {
+  font-family: satoshi;
+  src: url(./assets/font/Satoshi-Regular.otf);
+}
+@font-face {
+  font-family: satoshiM;
+  src: url(./assets/font/Satoshi-Medium.otf);
+}
+@font-face {
+  font-family: schabo;
+  src: url(./assets/font/Pulsar-Original.otf);
+}
+@font-face {
+  font-family: geist;
+  src: url(./assets/font/Geist-Regular.ttf);
+}
+@font-face {
+  font-family: tactico;
+  src: url(./assets/font/Tactico.otf);
+}
+@font-face {
+  font-family: mono;
+  src: url(./assets/font/Aquatico-Regular.otf);
+}
+@font-face {
+  font-family: IinterBold;
+  src: url(./assets/font/Inter_18pt-Bold.ttf);
+}
+@font-face {
+  font-family: IinterSemiBold;
+  src: url(./assets/font/Inter_18pt-SemiBold.ttf);
+}
+@font-face {
+  font-family: IinterRegular;
+  src: url(./assets/font/Inter_18pt-Regular.ttf);
+}
+@font-face {
+  font-family: IinterLight;
+  src: url(./assets/font/Inter_18pt-Light.ttf);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: interBold;
+  src: url(./assets/font/SpaceGrotesk-Bold.ttf);
+}
+@font-face {
+  font-family: interSemiBold;
+  src: url(./assets/font/SpaceGrotesk-SemiBold.ttf);
+}
+@font-face {
+  font-family: interRegular;
+  src: url(./assets/font/SpaceGrotesk-Regular.ttf);
+}
+@font-face {
+  font-family: interLight;
+  src: url(./assets/font/SpaceGrotesk-Light.ttf);
+}
+@font-face {
+  font-family: interMedium;
+  src: url(./assets/font/SpaceGrotesk-Regular.ttf);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sudoku-board {
+  display: grid;
+  gap: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #ccc;
+} */
+
+.chat-section {
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  padding: 5px 10px;
+}
+
+::-webkit-scrollbar {
+  height: 3px;
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  width: 4px;
+  border-radius: 50px;
+  margin: 0px 550px;
+  /* padding-left: 300px; */
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #54575f;
+  border-radius: 10px;
+  z-index: 80;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  cursor: pointer;
+}
+
+.boxShadowLight {
+  -webkit-box-shadow: 0px 0px 23px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 0px 23px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 23px 1px rgba(0, 0, 0, 0.05);
+}
+.boxShadowLight2 {
+  -webkit-box-shadow: 0px 0px 33px 1px rgba(0, 0, 0, 0.18);
+  -moz-box-shadow: 0px 0px 33px 1px rgba(0, 0, 0, 0.18);
+  box-shadow: 0px 0px 33px 1px rgba(0, 0, 0, 0.18);
+}
+
+table {
+  border: 2px solid #000000;
+  border-spacing: 0;
+  border-collapse: collapse;
+  transition: all 0.5s;
+}
+
+ul {
+  list-style-type: none;
+}
+
+td {
+  border: 1px solid #000000;
+  text-align: center;
+  vertical-align: middle;
+}
+
+td input {
+  color: #000000;
+  padding: 0;
+  border: 0;
+  text-align: center;
+  /* width: 48px;
+  height: 48px; */
+  font-size: 24px;
+  background-color: #ffffff;
+  outline: none;
+  text-transform: uppercase;
+  transition: all 0.5s;
+}
+
+input:disabled {
+  background-color: #ffffff;
+}
+
+tr:nth-child(3n) {
+  border-bottom: 2px solid #000000;
+}
+
+tr:nth-child(3n + 1) {
+  border-top: 2px solid #000000;
+}
+
+td:nth-child(3n) {
+  border-right: 2px solid #000000;
+}
+
+td:nth-child(3n + 1) {
+  border-left: 2px solid #000000;
 }
