@@ -9,7 +9,6 @@ import { getStorage } from "firebase/storage";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  // apiKey: "AIzaSyCK_goiwoUmdsDWGQleFCg-2FZa_RpDlT4",
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "attendance-60543.firebaseapp.com",
   projectId: "attendance-60543",
