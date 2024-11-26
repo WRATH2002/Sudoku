@@ -53,6 +53,7 @@ const LandingPage = () => {
         set(ref(db, `games/${gameId}/colorTheme`), true);
         set(ref(db, `games/${gameId}/considerMistakes`), true);
         set(ref(db, `games/${gameId}/gameEnd`), false);
+        set(ref(db, `games/${gameId}/creationTime`), new Date().toISOString());
 
         // // Update local state
         // setBoard(boardString);

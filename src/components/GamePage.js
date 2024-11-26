@@ -10,7 +10,9 @@ import {
   Link,
   Play,
   Settings,
+  Timer,
   User,
+  Users,
 } from "lucide-react";
 import QRCode from "react-qr-code";
 import TxtShuffle from "txt-shuffle";
@@ -44,10 +46,14 @@ const GamePage = () => {
   const [colorTheme, setColorTheme] = useState(false);
   const [countMistakes, setCountMistakes] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [expand, setExpand] = useState(false);
+  const [easter, setEaster] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [idCopied, setIDCopied] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
   const [currBoard, setCurrBoard] = useState(""); // Current game state
+  const [time, setTime] = useState("");
+  const [elapsedTime, setElapsedTime] = useState("");
   const [board, setBoard] = useState(""); // Original board for non-editable cells
   const [solvedBoard, setSolvedBoard] = useState(""); // Solved board for validation
   const [chat, setChat] = useState([]); // Chat messages
@@ -146,6 +152,12 @@ const GamePage = () => {
     onValue(endRef, (snapshot) => {
       const end = snapshot.val();
       setGameEnd(end);
+    });
+
+    const timeRef = ref(db, `games/${gameId}/creationTime`);
+    onValue(timeRef, (snapshot) => {
+      const ti = snapshot.val();
+      setTime(ti);
     });
   }, [gameId, mode]);
 
@@ -256,6 +268,44 @@ const GamePage = () => {
       });
   };
 
+  useEffect(() => {
+    // Function to calculate elapsed time
+    function calculateElapsedTime() {
+      if (time == undefined || time.length == 0) {
+        return "00:00:00";
+      } else {
+        const now = new Date();
+        const createdAt = new Date(time);
+
+        const elapsedMilliseconds = now - createdAt;
+
+        // Calculate hours, minutes, and seconds
+        const hours = Math.floor(elapsedMilliseconds / (1000 * 60 * 60));
+        const minutes = Math.floor(
+          (elapsedMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((elapsedMilliseconds % (1000 * 60)) / 1000);
+
+        // Format as hh:mm:ss
+        return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+          2,
+          "0"
+        )}:${String(seconds).padStart(2, "0")}`;
+      }
+    }
+
+    // Initial calculation
+    setElapsedTime(calculateElapsedTime());
+
+    // Update every second
+    const interval = setInterval(() => {
+      setElapsedTime(calculateElapsedTime());
+    }, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, [time]);
+
   return (
     <>
       {loading ? (
@@ -279,6 +329,73 @@ const GamePage = () => {
               recycle={false} // Ensures it doesn't loop infinitely
             />
           )}
+          {/* <div
+            className="w-[79%] md:w-[300px] lg:w-[300px] flex flex-col justify-center items-center bg-white fixed left-[50%] top-[50%] boxShadowLight2 rounded-xl p-[30px] py-[25px] font-[interRegular]"
+            style={{ transform: "translate(-50%, -50%)" }}
+          >
+            <div className="font-[interBold] text-[23px]">
+              Sudoku Multiplayer
+            </div>
+            <div className=" text-[15px] mt-[-2px]">v 1.0.04</div>{" "}
+          
+            <div className="font-[interSemibold] text-[19px] mt-[15px]">
+              By, Himadri Purkait
+            </div>
+          </div> */}
+          <div
+            className={
+              "font-[interRegular] fixed w-full min-h-[100dvh] z-30 flex justify-center items-center left-0 top-0 bg-[#0000006e]" +
+              (expand
+                ? " flex md:hidden lg:hidden"
+                : " hidden md:hidden lg:hidden")
+            }
+          >
+            <div className="w-full p-[30px] py-[25px] bg-[white] flex flex-col justify-center items-center h-auto">
+              <div className="text-[20px] font-[interBold] w-[75%] flex justify-center items-center">
+                Share with your friends
+              </div>
+              <div
+                className="font-[interSemibold]  w-[65%] flex justify-center items-center h-[40px] border border-[#dde4ec] rounded-lg hover:bg-[#E2E3E5] mt-[20px]"
+                onClick={() => {
+                  handleCopyLink();
+                }}
+              >
+                <Link
+                  width={16}
+                  height={16}
+                  strokeWidth={2.4}
+                  className="mr-[7px]"
+                />
+                Copy Link
+              </div>
+              <div className=" w-[75%] flex justify-center items-center text-[#64748B] my-[10px]">
+                Share link to play together
+              </div>
+              <div className=" w-[65%] flex justify-center items-center">
+                <QRCode
+                  size={256}
+                  style={{
+                    height: "auto",
+                    maxWidth: "100%",
+                    width: "100%",
+                  }}
+                  value={`https://sudokuio.vercel.app/joinGame/join?roomId=${gameId}&mode=${mode}`}
+                  viewBox={`0 0 256 256`}
+                />
+              </div>
+              <div className=" w-[75%] flex justify-center items-center text-[#64748B] my-[10px]">
+                Scan qr code to join game
+              </div>
+              <div
+                className=" w-[65%] flex justify-center items-center bg-[#0F172A]  rounded-lg text-white font-[interSemibold] h-[40px] mt-[0px]"
+                onClick={() => {
+                  setExpand(false);
+                }}
+              >
+                Close
+              </div>
+            </div>
+          </div>
           <div
             className={
               "fixed  h-[35px] rounded-[10px] bottom-0 left-[50%] bg-[#0F172A] text-white flex justify-center items-center boxShadowLight border border-[#0F172A] overflow-hidden whitespace-nowrap" +
@@ -307,13 +424,14 @@ const GamePage = () => {
             <div className="w-full md:w-full lg:w-[70%] h-full  border-[0px] md:border-[1.5px] lg:border-[1.5px] border-[#dde4ec] rounded-[0px] md:rounded-2xl lg:rounded-2xl p-[0px] py-[0px] md:p-[20px] md:py-[0px] lg:p-[20px] lg:py-[0px] flex flex-col justify-start items-center text-[#64748B] ">
               <div className="w-full flex justify-between items-center min-h-[60px] h-[60px] border-b-[1.5px] border-[#dde4ec]">
                 <div className="flex justify-start items-center w-[100px]">
-                  <CirclePlay
-                    className="text-[#64748B] mr-[7px]"
+                  <Timer
+                    className="text-[#000000] mr-[7px]"
                     width={23}
                     height={23}
                     strokeWidth={2}
                   />
-                  00:00:27
+                  {/* 00:00:27 */}
+                  {elapsedTime}
                 </div>
                 {countMistakes ? (
                   <div className="flex justify-start items-center">
@@ -456,7 +574,7 @@ const GamePage = () => {
                         </div>
                       </div>
 
-                      <span className="text-[16px] mt-[25px] mb-[2px] font-[interSemibold] flex justify-start items-center">
+                      <span className="text-[16px] mt-[13px] mb-[2px] font-[interSemibold] flex justify-start items-center">
                         Game ID
                       </span>
                       <span
@@ -475,6 +593,15 @@ const GamePage = () => {
                           //   handleCopyID();
                           // }}
                         />
+                      </span>
+
+                      <span
+                        className="w-full text-[16px] mt-[30px] mb-[2px] font-[interSemibold] flex justify-end items-center"
+                        onClick={() => {
+                          setEaster(true);
+                        }}
+                      >
+                        version: &nbsp; 1.0.04
                       </span>
                     </div>
                   ) : (
@@ -708,8 +835,22 @@ const GamePage = () => {
                   </div>
                 </div>
                 <div className="h-[555px] w-full md:w-[calc(100%-535px)] lg:w-[calc(100%-675px)] ml-[0px] md:ml-[20px] lg:ml-[20px] rounded-lg  border-[1.5px] border-[#ecf0f5] flex flex-col justify-start items-start overflow-hidden mt-[20px] md:mt-[0px] lg:mt-[0px] mb-[10px] md:mb-[0px] lg:mb-[0px] ">
-                  <div className="w-full min-h-[50px] flex justify-start items-center border-b-[1.5px] border-[#ecf0f5] font-[interSemibold] text-[16px] pl-[15px] text-black">
-                    In-Game Chat
+                  <div className="w-full min-h-[50px] flex justify-between items-center border-b-[1.5px] border-[#ecf0f5] font-[interSemibold] text-[16px] pl-[15px] pr-[5px] text-black">
+                    <div>In-Game Chat</div>
+                    <div
+                      className="bg-[#F1F5F9] hover:bg-[#E2E3E5] cursor-pointer px-[15px] h-[calc(100%-10px)] rounded-lg flex md:hidden lg:hidden justify-center items-center"
+                      onClick={() => {
+                        setExpand(!expand);
+                      }}
+                    >
+                      <Users
+                        width={16}
+                        height={16}
+                        strokeWidth={2.5}
+                        className="mr-[7px]"
+                      />{" "}
+                      Invite
+                    </div>
                   </div>
                   <div className="min-h-[calc(100%-105px)] border-none rounded-lg overflow-y-scroll w-full flex flex-col justify-start items-start p-[15px] chat-box">
                     {chat?.map((msg, index) => (

@@ -22,12 +22,26 @@ const IndividualJoiningPage = () => {
 
   function handleStart() {
     navigate(
-      `/game/${id?.split("_")[0]}?name=${name}&mode=${id?.split("_")[1]}`
+      `/game/${id?.split("_")[0]}?name=${name}&mode=${decideMode(
+        id?.split("_")[1]
+      )}`
     );
   }
 
   function handleBack() {
     navigate(`/`);
+  }
+
+  function decideMode(data) {
+    if (data == "M") {
+      return "medium";
+    } else if (data == "E") {
+      return "easy";
+    } else if (data == "H") {
+      return "hard";
+    } else if (data == "I") {
+      return "insane";
+    }
   }
 
   function show() {
